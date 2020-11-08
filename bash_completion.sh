@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASEDIR=$(dirname $_ | xargs realpath)
+BASEDIR=$(dirname $BASH_SOURCE | xargs realpath)
 
 alias k8s-cluster-state-manager="docker run --rm -it --env-file=${BASEDIR}/.env k8s-cluster-state-manager"
 

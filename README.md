@@ -73,5 +73,19 @@ $ export KUBECONFIG=$(realpath kubeconfig)
 ## Use bash_completion
 ```
 $ cd scaleway-k8s/
-$ echo . $(./bash_completion.sh) >> ~/.bashrc
+$ echo . $(realpath ./bash_completion.sh) >> ~/.bashrc
+```
+```
+$ k8s-cluster-state-manager
+
+========================================
+  PiwPiiwn - k8s Cluster State Manager
+========================================
+
+Usage: /app/entrypoint.sh [up|stop|down|show-kubeconfig]
+---
+up              - Create the cluster
+stop            - Stop destroy workers
+down            - Destroy cluster
+show-kubeconfig - Displays kubeconfig file
 ```
