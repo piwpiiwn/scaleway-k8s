@@ -19,16 +19,18 @@ default_zone: fr-par-1
 
 ## Docker Usage
 1. Prepare environment variables (see .env.template)
+* Set AWS credencials
 ```
-# AWS credentials (for tfstate in S3 bucket)
 $ aws configure get aws_access_key_id     --profile piwpiiwn | xargs -I% echo AWS_ACCESS_KEY_ID=%      >   .env
 $ aws configure get aws_secret_access_key --profile piwpiiwn | xargs -I% echo AWS_SECRET_ACCESS_KEY=%  >>  .env
 $ aws configure get region                --profile piwpiiwn | xargs -I% echo AWS_DEFAULT_REGION=%     >>  .env
 ```
+* Set Scaleway credencials
 ```
-# Scaleway credentials (without profiles)
+# Without profiles
 $ awk '/#/{next} NF{print "SCW_"toupper(substr($1, 1, length($1)-1))"="$2}' ~/.config/scw/config.yaml  >> .env
 ```
+* Fill .env file with other vars. See .env.template.
 
 2. Build the image
 ```
@@ -70,7 +72,7 @@ $ docker run --rm -it --env-file=.env k8s-cluster-state-manager show-kubeconfig 
 $ export KUBECONFIG=$(realpath kubeconfig)
 ```
 
-## Use bash_completion
+## Extra: Use bash_completion
 ```
 $ cd scaleway-k8s/
 $ echo . $(realpath ./bash_completion.sh) >> ~/.bashrc
