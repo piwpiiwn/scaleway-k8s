@@ -1,13 +1,14 @@
 
 resource "scaleway_k8s_cluster_beta" "piw" {
-  name    = "piwpiiwn"
-  version = "1.19.3"
-  cni     = "calico"
+  name    = var.cluster_name
+  version = var.cluster_version
+  cni     = var.cluster_cni
 }
 
 resource "scaleway_k8s_pool_beta" "piw" {
+  count      = var.shutdown_workers ? 0 : 1
   cluster_id = scaleway_k8s_cluster_beta.piw.id
-  name       = "piwpiiwn-pool"
-  node_type  = "DEV1-M"
-  size       = 1
+  name       = "workerpool"
+  node_type  = var.node_type
+  size       = var.num_workers
 }
